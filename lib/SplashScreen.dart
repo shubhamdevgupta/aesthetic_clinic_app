@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/icons/wqmis_splash.jpg'),
+            image: AssetImage('assets/icons/clinic.png'),
             fit: BoxFit.cover,
           ),
         ),
