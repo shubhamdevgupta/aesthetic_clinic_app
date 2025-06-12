@@ -12,45 +12,53 @@ class ServiceDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFDF6F6),
       appBar: AppBar(
-        title: Text(service.name),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.black87,
+        title: Text(
+          service.name,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: Colors.black87,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Hero icon
+                // Icon Banner
                 Center(
                   child: CircleAvatar(
-                    radius: 45,
-                    backgroundColor: Colors.pink.shade50,
-                    child: Icon(service.icon, size: 40, color: Colors.pink),
+                    radius: 50,
+                    backgroundColor: const Color(0xFFFFE5EC),
+                    child: Icon(service.icon, size: 36, color: Colors.pinkAccent),
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
 
                 // Description Card
                 Card(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  elevation: 2,
+                  elevation: 3,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(18.0),
                     child: Text(
                       service.description,
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16, color: Colors.black87),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
 
                 // Benefits
                 const Text(
@@ -64,11 +72,11 @@ class ServiceDetailsScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 ...service.benefits.map(
                       (benefit) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 6),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.check_circle,
-                            color: Colors.green, size: 20),
+                        const Icon(Icons.check_circle, size: 20, color: Colors.green),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -82,7 +90,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // Price
+                // Price Tag
                 Text(
                   'Price: ${service.price}',
                   style: const TextStyle(
@@ -91,33 +99,34 @@ class ServiceDetailsScreen extends StatelessWidget {
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 36),
 
                 // Book Now Button
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton(
+                  height: 50,
+                  child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const BookingOverviewScreen(),
+                          builder: (_) => const BookingOverviewScreen(), // ← can pass service if desired
                         ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pinkAccent.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    child: const Text(
+                    icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
+                    label: const Text(
                       'Book Now',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pinkAccent.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
                       ),
                     ),
                   ),

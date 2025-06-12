@@ -1,6 +1,7 @@
 import 'package:aesthetic_clinic_app/BookingOverviewScreen.dart';
 import 'package:aesthetic_clinic_app/Service.dart';
 import 'package:aesthetic_clinic_app/ServiceDetailScreen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,6 +45,12 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
+  final List<String> bannerImages = [
+    'assets/icons/dental.png',
+    'assets/icons/derma.png',
+    'assets/icons/laser.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +58,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
         title: const Text(
           'Aesthetic Clinic',
           style: TextStyle(
@@ -59,24 +67,38 @@ class HomeScreen extends StatelessWidget {
             fontSize: 22,
           ),
         ),
-        centerTitle: true,
       ),
       body: Column(
         children: [
-          // Hero Banner
+          // Hero Banner with Carousel
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                'assets/banner.jpg',
+            child: CarouselSlider.builder(
+              itemCount: bannerImages.length,
+              itemBuilder: (context, index, realIndex) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Container(
+                    color: Colors.white,
+                    child: Image.asset(
+                      bannerImages[index],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+                );
+              },
+              options: CarouselOptions(
                 height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                viewportFraction: 1.0,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
 
           // Services Grid
           Expanded(
@@ -89,8 +111,8 @@ class HomeScreen extends StatelessWidget {
                     itemCount: services.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: crossAxisCount,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
                       childAspectRatio: 1,
                     ),
                     itemBuilder: (context, index) {
@@ -103,9 +125,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // Booking Button
+          // Quick Booking Button
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: SizedBox(
               width: double.infinity,
               height: 50,
@@ -113,15 +135,14 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const BookingOverviewScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const BookingOverviewScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pinkAccent.shade100,
+                  backgroundColor: const Color(0xFFFFC1CC), // blush tone
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
                 child: const Text(
@@ -129,7 +150,6 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -148,11 +168,12 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Material(
       color: Colors.white,
       elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      borderRadius: BorderRadius.circular(20),
       child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: () {
           Navigator.push(
             context,
@@ -161,14 +182,21 @@ class ServiceCard extends StatelessWidget {
             ),
           );
         },
-        borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color(0xFFFFF9F9), // soft pastel base
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(service.icon, size: 36, color: Colors.pinkAccent),
-              const SizedBox(height: 10),
+              CircleAvatar(
+                backgroundColor: const Color(0xFFFFE5EC),
+                radius: 28,
+                child: Icon(service.icon, size: 28, color: Colors.pinkAccent),
+              ),
+              const SizedBox(height: 12),
               Text(
                 service.name,
                 textAlign: TextAlign.center,

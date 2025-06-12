@@ -6,7 +6,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.pinkAccent),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blueAccent),
       home: const SplashScreen(),
     ),
   );
