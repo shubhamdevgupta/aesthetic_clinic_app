@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'SplashScreen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
   runApp(
-   const MyApp(),
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.pinkAccent),
+      home: const SplashScreen(),
+    ),
   );
 }
 
@@ -21,9 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-      },
+      routes: {'/': (context) => const SplashScreen()},
     );
   }
 }
