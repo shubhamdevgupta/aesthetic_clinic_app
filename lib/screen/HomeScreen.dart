@@ -1,8 +1,10 @@
-import 'package:aesthetic_clinic_app/BookingOverviewScreen.dart';
-import 'package:aesthetic_clinic_app/Service.dart';
-import 'package:aesthetic_clinic_app/ServiceDetailScreen.dart';
+import 'package:aesthetic_clinic_app/screen/BookingOverviewScreen.dart';
+import 'package:aesthetic_clinic_app/service/Service.dart';
+import 'package:aesthetic_clinic_app/screen/ServiceDetailScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import '../service/ServiceCard.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -43,6 +45,13 @@ class HomeScreen extends StatelessWidget {
       price: '₹2999',
       icon: Icons.local_hospital,
     ),
+    Service(
+      name: 'Help',
+      description: 'Rehydrate and replenish your body with IV nutrients.',
+      benefits: ['Energy boost', 'Quick hydration', 'Immune support'],
+      price: '₹2999',
+      icon: Icons.help,
+    ),
   ];
 
   final List<String> bannerImages = [
@@ -54,7 +63,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF6F6),
+      backgroundColor: const Color(0xFFEFBBBE),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -106,24 +115,23 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  int crossAxisCount = constraints.maxWidth > 600 ? 3 : 2;
                   return GridView.builder(
                     itemCount: services.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
-                      childAspectRatio: 1,
+                      childAspectRatio: 1.1,
                     ),
                     itemBuilder: (context, index) {
-                      final service = services[index];
-                      return ServiceCard(service: service);
+                      return ServiceCard(service: services[index]);
                     },
                   );
                 },
               ),
             ),
           ),
+
 
           // Quick Booking Button
           Padding(
@@ -139,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFC1CC), // blush tone
+                  backgroundColor: Colors.pinkAccent,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -156,59 +164,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ServiceCard extends StatelessWidget {
-  final Service service;
-
-  const ServiceCard({super.key, required this.service});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      elevation: 3,
-      borderRadius: BorderRadius.circular(20),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => ServiceDetailsScreen(service: service),
-            ),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color(0xFFFFF9F9), // soft pastel base
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundColor: const Color(0xFFFFE5EC),
-                radius: 28,
-                child: Icon(service.icon, size: 28, color: Colors.pinkAccent),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                service.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

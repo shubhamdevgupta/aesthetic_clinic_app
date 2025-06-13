@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Delay for 2 seconds then navigate to HomeScreen
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -25,17 +25,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/icons/clinic.png'),
-            fit: BoxFit.cover,
+        color: const Color(0xFFB67478),
+        child: Center(
+          child: Image.asset(
+            'assets/icons/splash_logo.gif',
+            width: 500,
+            height: 500,
+            fit: BoxFit.contain,
           ),
         ),
       ),
     );
+
   }
 }

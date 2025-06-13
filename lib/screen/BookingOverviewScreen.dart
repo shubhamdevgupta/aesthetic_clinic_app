@@ -92,7 +92,7 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF6F6), // soft pink background
+      backgroundColor: const Color(0xFFEFBBBE), // soft pink background
       appBar: AppBar(
         title: const Text('Book Appointment'),
         backgroundColor: Colors.transparent,
@@ -209,7 +209,7 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent.shade100,
+                            backgroundColor: Colors.pinkAccent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),

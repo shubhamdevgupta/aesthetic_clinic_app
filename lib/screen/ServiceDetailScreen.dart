@@ -1,5 +1,5 @@
-import 'package:aesthetic_clinic_app/BookingOverviewScreen.dart';
-import 'package:aesthetic_clinic_app/Service.dart';
+import 'package:aesthetic_clinic_app/screen/BookingOverviewScreen.dart';
+import 'package:aesthetic_clinic_app/service/Service.dart';
 import 'package:flutter/material.dart';
 
 class ServiceDetailsScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ServiceDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF6F6),
+      backgroundColor: const Color(0xFFEFBBBE),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -124,7 +124,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pinkAccent.shade100,
+                      backgroundColor: Colors.pinkAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
