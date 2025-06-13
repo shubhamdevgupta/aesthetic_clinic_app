@@ -13,6 +13,8 @@ class HomeScreen extends StatelessWidget {
     Service(
       name: 'Dermatology',
       description: 'Professional skincare treatments for healthy glowing skin.',
+      fullDescription:
+      'Professional skincare treatments for healthy glowing skin. Our dermatology services address acne, pigmentation, wrinkles, and much more using advanced techniques tailored to your skin type.',
       benefits: ['Acne treatment', 'Anti-aging care', 'Skin rejuvenation'],
       price: '₹1499',
       icon: Icons.spa,
@@ -20,6 +22,8 @@ class HomeScreen extends StatelessWidget {
     Service(
       name: 'Laser',
       description: 'Advanced laser treatments for hair removal and skin.',
+      fullDescription:
+      'Advanced laser treatments help with permanent hair reduction, skin resurfacing, and rejuvenation. Safe, painless, and effective for all skin types.',
       benefits: ['Permanent hair reduction', 'Skin tone improvement'],
       price: '₹2499',
       icon: Icons.flash_on,
@@ -27,6 +31,8 @@ class HomeScreen extends StatelessWidget {
     Service(
       name: 'Dental',
       description: 'Smile brighter with our advanced dental care services.',
+      fullDescription:
+      'Smile brighter with our advanced dental care. From routine cleanings to cosmetic procedures, our expert dentists ensure optimal oral health and confidence.',
       benefits: ['Teeth whitening', 'Braces', 'Implants'],
       price: '₹1999',
       icon: Icons.medical_services,
@@ -34,6 +40,8 @@ class HomeScreen extends StatelessWidget {
     Service(
       name: 'Hijama',
       description: 'Ancient therapy to detox and energize your body.',
+      fullDescription:
+      'Hijama (cupping therapy) is a time-tested remedy that detoxifies the blood, improves circulation, and relieves pain, stress, and fatigue. Done by certified therapists.',
       benefits: ['Improves circulation', 'Boosts immunity'],
       price: '₹899',
       icon: Icons.favorite,
@@ -41,15 +49,19 @@ class HomeScreen extends StatelessWidget {
     Service(
       name: 'IV Therapy',
       description: 'Rehydrate and replenish your body with IV nutrients.',
+      fullDescription:
+      'IV Therapy delivers essential fluids, vitamins, and minerals directly into your bloodstream to enhance hydration, energy, and immune function quickly and efficiently.',
       benefits: ['Energy boost', 'Quick hydration', 'Immune support'],
       price: '₹2999',
       icon: Icons.local_hospital,
     ),
     Service(
       name: 'Help',
-      description: 'Rehydrate and replenish your body with IV nutrients.',
-      benefits: ['Energy boost', 'Quick hydration', 'Immune support'],
-      price: '₹2999',
+      description: 'Reach out to us for personalized consultation and support.',
+      fullDescription:
+      'Have questions? Our team is here to assist you with tailored solutions and expert advice for your beauty, skincare, and wellness goals.',
+      benefits: ['Consultation', 'Expert advice', 'Personalized care'],
+      price: 'Free',
       icon: Icons.help,
     ),
   ];
@@ -169,8 +181,23 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const BookingOverviewScreen()),
+                        PageRouteBuilder(
+                          transitionDuration: const Duration(milliseconds: 500),
+                          pageBuilder: (_, __, ___) => const BookingOverviewScreen(),
+                          transitionsBuilder: (_, animation, __, child) {
+                            final offsetAnimation = Tween<Offset>(
+                              begin: const Offset(1.0, 0.0), // from right
+                              end: Offset.zero,
+                            ).animate(animation);
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            );
+                          },
+                        ),
                       );
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pinkAccent,

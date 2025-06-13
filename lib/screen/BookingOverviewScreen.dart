@@ -1,3 +1,4 @@
+import 'package:aesthetic_clinic_app/screen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 
 class BookingOverviewScreen extends StatefulWidget {
@@ -50,35 +51,6 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
     if (picked != null) setState(() => selectedTime = picked);
   }
 
-  void _submit() {
-    if (_formKey.currentState!.validate() &&
-        selectedDate != null &&
-        selectedTime != null &&
-        selectedService != null) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          title: const Text("Booking Confirmed"),
-          content: Text(
-            "You booked $selectedService on ${selectedDate!.toLocal().toString().split(' ')[0]} at ${selectedTime!.format(context)}",
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("OK"),
-            ),
-          ],
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please complete all fields")),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -321,4 +293,40 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
       ],
     );
   }
+  void _submit() {
+    if (_formKey.currentState!.validate() &&
+        selectedDate != null &&
+        selectedTime != null &&
+        selectedService != null) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text("Booking Confirmed"),
+          content: Text(
+            "You booked $selectedService on ${selectedDate!.toLocal().toString().split(' ')[0]} at ${selectedTime!.format(context)}",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  HomeScreen()),
+                      (route) => false,
+                );
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please complete all fields")),
+      );
+    }
+  }
+
 }
