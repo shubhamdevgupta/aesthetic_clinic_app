@@ -1,6 +1,6 @@
 import 'package:aesthetic_clinic_app/screen/BookingOverviewScreen.dart';
+import 'package:aesthetic_clinic_app/screen/ProfileScreen.dart';
 import 'package:aesthetic_clinic_app/service/Service.dart';
-import 'package:aesthetic_clinic_app/screen/ServiceDetailScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -62,109 +62,137 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFEFBBBE),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'Aesthetic Clinic',
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/icons/screen_bg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          // Hero Banner with Carousel
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CarouselSlider.builder(
-              itemCount: bannerImages.length,
-              itemBuilder: (context, index, realIndex) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: Container(
-                    color: Colors.white,
-                    child: Image.asset(
-                      bannerImages[index],
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  ),
-                );
-              },
-              options: CarouselOptions(
-                height: 180,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                viewportFraction: 1.0,
-                autoPlayInterval: const Duration(seconds: 3),
-                autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          // Services Grid
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return GridView.builder(
-                    itemCount: services.length,
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      childAspectRatio: 1.1,
-                    ),
-                    itemBuilder: (context, index) {
-                      return ServiceCard(service: services[index]);
+        Scaffold(
+          backgroundColor: Colors.transparent, // Important!
+          appBar: AppBar(
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+            actions: [
+              Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.person_rounded,
+                        color: Colors.pinkAccent,size: 34,),
+                    // Cart icon
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                      );
                     },
-                  );
-                },
+                  )
+                ],
+              ),
+            ],
+            title: const Text(
+              'Aesthetic Clinic',
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
               ),
             ),
           ),
-
-
-          // Quick Booking Button
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const BookingOverviewScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pinkAccent,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                child: const Text(
-                  'Quick Booking',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+          body: Column(
+            children: [
+              // Hero Banner
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CarouselSlider.builder(
+                  itemCount: bannerImages.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: Container(
+                        color: Colors.white,
+                        child: Image.asset(
+                          bannerImages[index],
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+                    );
+                  },
+                  options: CarouselOptions(
+                    height: 180,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 1.0,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
                   ),
                 ),
               ),
-            ),
+              const SizedBox(height: 24),
+
+              // Services Grid
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return GridView.builder(
+                        itemCount: services.length,
+                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          childAspectRatio: 1.1,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ServiceCard(service: services[index]);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+              // Quick Booking Button
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const BookingOverviewScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pinkAccent,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: const Text(
+                      'Quick Booking',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

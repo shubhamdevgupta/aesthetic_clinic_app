@@ -13,8 +13,8 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color(0xFFEFBBBE),
-      elevation: 3,
+      color: Colors.transparent, // ✅ Remove blocking background
+      elevation: 4,
       borderRadius: BorderRadius.circular(20),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
@@ -30,7 +30,14 @@ class ServiceCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: const Color(0xFFFFF9F9), // soft pastel base
+            color: Colors.white.withOpacity(0.7), // ✅ Soft overlay
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              )
+            ],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +52,8 @@ class ServiceCard extends StatelessWidget {
                 service.name,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),

@@ -55,14 +55,6 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
         selectedDate != null &&
         selectedTime != null &&
         selectedService != null) {
-      final fullDateTime = DateTime(
-        selectedDate!.year,
-        selectedDate!.month,
-        selectedDate!.day,
-        selectedTime!.hour,
-        selectedTime!.minute,
-      );
-
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -91,148 +83,242 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      backgroundColor: const Color(0xFFEFBBBE), // soft pink background
-      appBar: AppBar(
-        title: const Text('Book Appointment'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Colors.black,
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final isTablet = constraints.maxWidth > 600;
-          return Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: isTablet ? 500 : double.infinity),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      const SizedBox(height: 12),
 
-                      // Service dropdown
-                      DropdownButtonFormField<String>(
-                        value: selectedService,
-                        decoration: InputDecoration(
-                          labelText: 'Select Service',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        items: services.map((service) {
-                          return DropdownMenuItem(value: service, child: Text(service));
-                        }).toList(),
-                        onChanged: (value) => setState(() => selectedService = value),
-                        validator: (value) =>
-                        value == null ? 'Please select a service' : null,
-                      ),
-                      const SizedBox(height: 16),
+    return Stack(
+      children: [
+        // 🔹 Background image
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/icons/screen_bg.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
 
-                      // Date picker
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        tileColor: Colors.white,
-                        title: Text(
-                          selectedDate != null
-                              ? 'Date: ${selectedDate!.toLocal().toString().split(' ')[0]}'
-                              : 'Select Date',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        trailing: const Icon(Icons.calendar_today),
-                        onTap: _pickDate,
-                      ),
-                      const SizedBox(height: 10),
+        // 🔸 Foreground content
+        Scaffold(
+          backgroundColor: Colors.transparent, // Make scaffold transparent
+          appBar: AppBar(
+            title: const Text('Book Appointment'),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            foregroundColor: Colors.black,
+          ),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              final isTablet = constraints.maxWidth > 600;
 
-                      // Time picker
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        tileColor: Colors.white,
-                        title: Text(
-                          selectedTime != null
-                              ? 'Time: ${selectedTime!.format(context)}'
-                              : 'Select Time',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        trailing: const Icon(Icons.access_time),
-                        onTap: _pickTime,
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Name
-                      TextFormField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          labelText: 'Full Name',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        validator: (value) =>
-                        value == null || value.isEmpty ? 'Required' : null,
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Phone number
-                      TextFormField(
-                        controller: _phoneController,
-                        decoration: InputDecoration(
-                          labelText: 'Phone Number',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) return 'Required';
-                          if (value.length < 10) return 'Enter valid phone number';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Submit button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
+              return Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: isTablet ? 500 : double.infinity,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 10,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: ListView(
+                        children: [
+                          const SizedBox(height: 12),
+                          Text(
+                            'Select Service',
+                            style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onPressed: _submit,
-                          child: const Text(
-                            'Book Now',
-                            style: TextStyle(
+                          Divider(thickness: 2.0),
+                          // Service dropdown
+                          DropdownButtonFormField<String>(
+                            value: selectedService,
+                            hint: const Text(
+                              'Select Service', // 👈 Displayed as placeholder
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(
+                                Icons.medical_services,
+                                color: Colors.pinkAccent,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.95),
+                              labelStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: const BorderSide(color: Colors.pinkAccent, width: 2),
+                              ),
+                            ),
+                            dropdownColor: Colors.white,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                            items: services.map((service) {
+                              return DropdownMenuItem(
+                                value: service,
+                                child: Text(service),
+                              );
+                            }).toList(),
+                            onChanged: (value) => setState(() => selectedService = value),
+                            validator: (value) => value == null ? 'Please select a service' : null,
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Date picker
+                          Container(
+                            decoration: BoxDecoration(
                               color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.pinkAccent),
+                            ),
+                            child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              tileColor: Colors.white,
+                              title: Text(
+                                selectedDate != null
+                                    ? 'Date: ${selectedDate!.toLocal().toString().split(' ')[0]}'
+                                    : 'Select Date',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(Icons.calendar_today,color: Colors.pinkAccent,),
+                              onTap: _pickDate,
                             ),
                           ),
-                        ),
+                          const SizedBox(height: 10),
+
+                          // Time picker
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.pinkAccent), // ✅ Pink border
+                            ),
+                            child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              title: Text(
+                                selectedTime != null
+                                    ? 'Time: ${selectedTime!.format(context)}'
+                                    : 'Select Time',
+                                style: const TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              trailing: const Icon(Icons.access_time, color: Colors.pinkAccent),
+                              onTap: _pickTime,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+
+// Name field
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: InputDecoration(
+                              labelText: 'Full Name',
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelStyle: const TextStyle(fontWeight: FontWeight.w600),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
+                              ),
+                            ),
+                            validator: (value) =>
+                            value == null || value.isEmpty ? 'Required' : null,
+                          ),
+                          const SizedBox(height: 16),
+
+// Phone number
+                          TextFormField(
+                            controller: _phoneController,
+                            decoration: InputDecoration(
+                              labelText: 'Phone Number',
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelStyle: const TextStyle(fontWeight: FontWeight.w600),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.pinkAccent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
+                              ),
+                            ),
+                            keyboardType: TextInputType.phone,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) return 'Required';
+                              if (value.length < 10) return 'Enter valid phone number';
+                              return null;
+                            },
+                          ),
+
+                          const SizedBox(height: 30),
+
+                          // Submit button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.pinkAccent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                              ),
+                              onPressed: _submit,
+                              child: const Text(
+                                'Book Now',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        },
-      ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
