@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 class Service {
   final String name;
-  final String description; // Short version
-  final String fullDescription; // Full version for expanded state
+  final String description;
+  final String fullDescription;
   final List<String> benefits;
   final String price;
-  final IconData icon;
+  final Widget icon; // <-- Changed from Icon to Widget
 
   Service({
     required this.name,
