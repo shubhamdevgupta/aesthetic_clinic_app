@@ -42,7 +42,11 @@ class ServiceCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              service.icon,
+              CircleAvatar(
+                backgroundColor: const Color(0xFFFFE5EC),
+                radius: 36,
+                child: Icon(service.icon, size: 36, color: Colors.pinkAccent),
+              ),
               const SizedBox(height: 12),
               Text(
                 service.name,

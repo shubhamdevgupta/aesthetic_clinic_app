@@ -17,12 +17,7 @@ class HomeScreen extends StatelessWidget {
       'Professional skincare treatments for healthy glowing skin. Our dermatology services address acne, pigmentation, wrinkles, and much more using advanced techniques tailored to your skin type.',
       benefits: ['Acne treatment', 'Anti-aging care', 'Skin rejuvenation'],
       price: '₹1499',
-      icon: Image.asset(
-        'assets/icons/ic_a.png',
-        width: 40,
-        height: 40,
-        fit: BoxFit.contain,
-      ),
+      icon: Icons.spa,
     ),
     Service(
       name: 'Laser',
@@ -31,12 +26,7 @@ class HomeScreen extends StatelessWidget {
       'Advanced laser treatments help with permanent hair reduction, skin resurfacing, and rejuvenation. Safe, painless, and effective for all skin types.',
       benefits: ['Permanent hair reduction', 'Skin tone improvement'],
       price: '₹2499',
-      icon: Image.asset(
-        'assets/icons/ic_b.png',
-        width: 40,
-        height: 40,
-        fit: BoxFit.contain,
-      ),
+      icon: Icons.flash_on,
     ),
     Service(
       name: 'Dental',
@@ -45,7 +35,7 @@ class HomeScreen extends StatelessWidget {
       'Smile brighter with our advanced dental care. From routine cleanings to cosmetic procedures, our expert dentists ensure optimal oral health and confidence.',
       benefits: ['Teeth whitening', 'Braces', 'Implants'],
       price: '₹1999',
-      icon: Image.asset('assets/icons/ic_c.png'),
+      icon: Icons.medical_services,
     ),
     Service(
       name: 'Hijama',
@@ -54,7 +44,7 @@ class HomeScreen extends StatelessWidget {
       'Hijama (cupping therapy) is a time-tested remedy that detoxifies the blood, improves circulation, and relieves pain, stress, and fatigue. Done by certified therapists.',
       benefits: ['Improves circulation', 'Boosts immunity'],
       price: '₹899',
-      icon: Image.asset('assets/icons/ic_d.png'),
+      icon: Icons.favorite,
     ),
     Service(
       name: 'IV Therapy',
@@ -63,9 +53,9 @@ class HomeScreen extends StatelessWidget {
       'IV Therapy delivers essential fluids, vitamins, and minerals directly into your bloodstream to enhance hydration, energy, and immune function quickly and efficiently.',
       benefits: ['Energy boost', 'Quick hydration', 'Immune support'],
       price: '₹2999',
-      icon: Image.asset('assets/icons/ic_e.png'),
+      icon: Icons.local_hospital,
     ),
- /*   Service(
+    Service(
       name: 'Help',
       description: 'Reach out to us for personalized consultation and support.',
       fullDescription:
@@ -73,7 +63,7 @@ class HomeScreen extends StatelessWidget {
       benefits: ['Consultation', 'Expert advice', 'Personalized care'],
       price: 'Free',
       icon: Icons.help,
-    ),*/
+    ),
   ];
 
   final List<String> bannerImages = [
@@ -105,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.person_rounded,
-                        color: Colors.pinkAccent,size: 34,),
+                      color: Colors.pinkAccent,size: 34,),
                     // Cart icon
                     onPressed: () {
                       Navigator.push(
@@ -118,7 +108,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
             title: const Text(
-              'Glow Aesthetic Clinic',
+              'Aesthetic Clinic',
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
