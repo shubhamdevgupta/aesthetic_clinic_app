@@ -18,6 +18,7 @@ Whether it’s dermatology, laser treatments, or IV therapy — Glow Aesthetic C
 
 
 ✨ Features
+
 🔹 Home Screen – Browse 6 curated services and navigate to quick booking or your profile.
 
 🔹 Service Details – Read a short and full description with expandable "show more/less" and proceed to book instantly.
@@ -31,6 +32,7 @@ Whether it’s dermatology, laser treatments, or IV therapy — Glow Aesthetic C
 🔹 Dialog Designs – Custom success dialogs with background imagery for enhanced UX.
 
 🛠️ Tech Stack
+
 Flutter – Cross-platform UI toolkit
 
 carousel_slider: ^5.1.1 – For auto-sliding service banners
@@ -40,17 +42,20 @@ Material UI Components
 Custom Icons & Assets (located in assets/icons/)
 
 🚀 Getting Started
+
 git clone https://github.com/shubhamdevgupta/aesthetic_clinic_app.git
 cd aesthetic_clinic_app
 flutter pub get
 flutter run
 
 ✅ Make sure assets are properly declared in your pubspec.yaml:
+
 flutter:
   assets:
     - assets/icons/
 
 📁 Folder Structure
+
 lib/
 ├── screen/
 │   ├── HomeScreen.dart
