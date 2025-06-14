@@ -44,8 +44,11 @@ Custom Icons & Assets (located in assets/icons/)
 🚀 Getting Started
 
 git clone https://github.com/shubhamdevgupta/aesthetic_clinic_app.git
+
 cd aesthetic_clinic_app
+
 flutter pub get
+
 flutter run
 
 ✅ Make sure assets are properly declared in your pubspec.yaml:
@@ -53,17 +56,6 @@ flutter run
 flutter:
   assets:
     - assets/icons/
-
-📁 Folder Structure
-lib/
-├── screen/
-│   ├── HomeScreen.dart
-│   ├── BookingOverviewScreen.dart
-│   ├── ProfileScreen.dart
-│   └── ServiceDetailScreen.dart
-├── service/
-│   ├── Service.dart
-│   └── ServiceCard.dart
 
 
 👨‍💻 Author
