@@ -68,9 +68,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen>
             child: CircleAvatar(
               radius: 45,
               backgroundColor: const Color(0xFFFFE5EC),
-              child:
-              Icon(service.icon, size: 36, color: Colors.pinkAccent),
-            ),
+              child:service.icon),
           ),
           const SizedBox(height: 16),
           Text(
@@ -136,9 +134,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen>
           CircleAvatar(
             radius: 30,
             backgroundColor: const Color(0xFFFFE5EC),
-            child:
-            Icon(service.icon, size: 26, color: Colors.pinkAccent),
-          ),
+            child:service.icon),
         ],
       ),
     );
