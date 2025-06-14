@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
             title: const Text(
-              'Aesthetic Clinic',
+              'Glow Aesthetic Clinic',
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
