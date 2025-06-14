@@ -322,7 +322,7 @@ class _BookingOverviewScreenState extends State<BookingOverviewScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.check_circle, color: Colors.pinkAccent, size: 60),
+                const Icon(Icons.check_circle, color: Colors.black, size: 60),
                 const SizedBox(height: 16),
                 const Text(
                   "Booking Confirmed",
