@@ -55,7 +55,6 @@ flutter:
     - assets/icons/
 
 📁 Folder Structure
-
 lib/
 ├── screen/
 │   ├── HomeScreen.dart
