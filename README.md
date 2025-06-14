@@ -4,6 +4,9 @@
 A sleek, elegant mobile application built using Flutter to streamline aesthetic service booking with ease and style.
 Whether it’s dermatology, laser treatments, or IV therapy — Glow Aesthetic Clinic delivers a smooth, modern user experience.
 
+### Splash Screen
+![IMG_2644](https://github.com/user-attachments/assets/cb7a651a-2660-4122-b28d-f26f40b64ccc)
+
 ### 🏠 Home Screen
 ![IMG_2638](https://github.com/user-attachments/assets/298452ca-22cc-4f43-ac3a-ec32193b6bce)
 
